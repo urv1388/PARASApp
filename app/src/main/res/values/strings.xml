@@ -9,4 +9,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="no_internet_connection">No internet connection found!</string>
+    <string name="network_failure">Network Failure</string>
+    <string name="conversion_error">Conversion Error</string>
 </resources>

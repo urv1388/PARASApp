@@ -4,10 +4,12 @@ import android.app.Application
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MyApp : Application() {
-    lateinit var firestore: FirebaseFirestore
+    companion object {
+        lateinit var firestoreDb: FirebaseFirestore
+    }
 
     override fun onCreate() {
         super.onCreate()
-        firestore = FirebaseFirestore.getInstance()
+        firestoreDb = FirebaseFirestore.getInstance()
     }
 }

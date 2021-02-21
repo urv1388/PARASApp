@@ -3,36 +3,33 @@ package com.parasapp.ui.main
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.parasapp.R
-import com.parasapp.core.ViewModelProviderFactory
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
-    lateinit var firestoreDb: FirebaseFirestore
-    lateinit var mainViewModel: MainViewModel
-    //    lateinit var storeCollectionReference: CollectionReference
-    lateinit var freeburgDocumentReference: DocumentReference
-
-    lateinit var salesCollectionReference: CollectionReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d(TAG, "onCreate: ")
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayoutYear, MyYearFragment.newInstance(1), "my_year_fragment")
+            .addToBackStack(null)
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayoutSales, SalesFragment.newInstance(), "my_sales_fragment")
+            .addToBackStack(null)
+            .commit()
 
 
+        val c: Calendar = Calendar.getInstance()
 
-
-
-
-
-
+        Log.d(TAG, "onCreate: ${c.getActualMinimum(Calendar.MONTH)}")
+        Log.d(TAG, "onCreate: ${c.getActualMaximum(Calendar.MONTH)}")
 
 
 //        Log.d(TAG, "onCreate: ${getDateOfCollection(Calendar.getInstance().time)}")
@@ -40,6 +37,16 @@ class MainActivity : AppCompatActivity() {
 //        freeburgDocumentReference.get().addOnSuccessListener {
 //            Log.d(TAG, "onCreate: ${it.get("adjustment")}")
 //
+//        }
+//
+//        salesCollectionReference =
+//            MyApp.firestoreDb.collection("stores/my_store_freeburg/sales_year/year_2021/sales")
+//        salesCollectionReference.get().addOnSuccessListener {
+//            it.forEach { value ->
+//                Log.d(TAG, "onCreate: ${value.get("gross_sales")}")
+//                Log.d(TAG, "onCreate: ${value.get("net_sales")}")
+//                Log.d(TAG, "onCreate: ${value.get("id")}")
+//            }
 //        }
 //        initViewModelAndObserver()
 //        mainViewModel.getCollectionReference("stores/my_store_freeburg/sales")

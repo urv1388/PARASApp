@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="com.parasapp.ui.main.SalesFragment"
+    android:name="com.parasapp.ui.main.MySearchFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.main.SalesFragment"
-    tools:listitem="@layout/fragment_sales" />
+    tools:context=".ui.main.MySearchFragment"
+    tools:listitem="@layout/fragment_search" />

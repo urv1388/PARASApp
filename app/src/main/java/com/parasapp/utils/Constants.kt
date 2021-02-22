@@ -6,7 +6,7 @@ import java.util.*
 class Constants {
 
     companion object {
-        private const val DATE_FORMAT = "ddMMyyyy"
+        private const val DATE_FORMAT = "yyyyMMdd"
         const val COLLECTION_STORES = "stores"
         const val COLLECTION_SALES_YEAR = "sales_year"
         var COLLECTION_ON_STORE = "my_store_freeburg"

@@ -18,7 +18,9 @@ import com.parasapp.model.MySales
  */
 class SalesFragment : Fragment() {
 
-    private var salesCollectionPath: String? = ""
+    private var salesCollectionPath: String? = null
+    private var salesSelectionStartDates: String? = null
+    private var salesSelectionEndDates: String? = null
     lateinit var mySalesCollectionReference: CollectionReference
     lateinit var mySalesRecyclerViewAdapter: MySalesRecyclerViewAdapter
 
@@ -26,6 +28,8 @@ class SalesFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             salesCollectionPath = it.getString(ARG_SALES_COLLECTION)
+            salesSelectionStartDates = it.getString(ARG_SALES_SELECTION_START_DATE)
+            salesSelectionEndDates = it.getString(ARG_SALES_SELECTION_END_DATE)
         }
     }
 
@@ -45,9 +49,16 @@ class SalesFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sales_list, container, false)
         mySalesCollectionReference = MyApp.firestoreDb.collection(
-            "stores/my_store_freeburg/sales_year/year_2021/sales"
+            salesCollectionPath ?: "stores/my_store_freeburg/sales_year/year_2021/sales"
         )
-        val query = mySalesCollectionReference.whereIn("id", arrayListOf("20022021"))
+        val query = if (salesSelectionStartDates != null && salesSelectionEndDates != null) {
+            mySalesCollectionReference.whereGreaterThanOrEqualTo(
+                "id",
+                salesSelectionStartDates!!
+            ).whereLessThanOrEqualTo("id", salesSelectionEndDates!!)
+        } else {
+            mySalesCollectionReference.limit(50)
+        }
         val fireStoreRecyclerOptions =
             FirestoreRecyclerOptions.Builder<MySales>().setQuery(query, MySales::class.java).build()
         mySalesRecyclerViewAdapter = MySalesRecyclerViewAdapter(fireStoreRecyclerOptions)
@@ -64,13 +75,21 @@ class SalesFragment : Fragment() {
 
         // TODO: Customize parameter argument names
         const val ARG_SALES_COLLECTION = "sales_path"
+        const val ARG_SALES_SELECTION_START_DATE = "sales_selection_start_date"
+        const val ARG_SALES_SELECTION_END_DATE = "sales_selection_end_date"
 
         // TODO: Customize parameter initialization
         @JvmStatic
-        fun newInstance(pathCollection: String? = "") =
+        fun newInstance(
+            pathCollection: String? = null,
+            startDate: String? = null,
+            endDate: String? = null
+        ) =
             SalesFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_SALES_COLLECTION, pathCollection)
+                    putString(ARG_SALES_SELECTION_START_DATE, startDate)
+                    putString(ARG_SALES_SELECTION_END_DATE, endDate)
                 }
             }
     }

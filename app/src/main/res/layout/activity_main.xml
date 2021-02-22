@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/frameLayoutStore"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/frameLayoutYear"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -17,21 +17,41 @@
     <FrameLayout
         android:id="@+id/frameLayoutYear"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/frameLayoutStore"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSelectedMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/frameLayoutStore"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutStore">
+
+        <TextView
+            android:id="@+id/textViewSelectedMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            tools:text="@string/app_name" />
+    </androidx.cardview.widget.CardView>
 
     <FrameLayout
         android:id="@+id/frameLayoutSales"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayoutYear">
-
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/cardViewSelectedMonth" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

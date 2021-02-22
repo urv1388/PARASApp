@@ -2,8 +2,6 @@ package com.parasapp.ui.main
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.FragmentManager
@@ -96,29 +94,29 @@ class MainActivity : AppCompatActivity() {
     fun onClickMonthSelection(month: Int) {
         val calendar = Calendar.getInstance()
         calendar.set(MONTH, month)
-        searchView.setQuery(calendar.getDisplayName(MONTH, LONG, Locale.US), true)
-        searchView.onActionViewCollapsed();
+//        searchView.setQuery(calendar.getDisplayName(MONTH, LONG, Locale.US), true)
+//        searchView.onActionViewCollapsed();
         showSalesOfMonth(calendar)
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        val myActionMenuItem: MenuItem = menu.findItem(R.id.action_search)
-        searchView = myActionMenuItem.getActionView() as SearchView
-        searchView.setOnSearchClickListener {
-            val fm: FragmentManager = supportFragmentManager
-            val dialogSearchFragment = MySearchFragment.newInstance(this, list)
-            dialogSearchFragment.show(fm, "my_search_fragment")
-        }
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-        })
-        return true
-    }
+//
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.main_menu, menu)
+//        val myActionMenuItem: MenuItem = menu.findItem(R.id.action_search)
+//        searchView = myActionMenuItem.getActionView() as SearchView
+//        searchView.setOnSearchClickListener {
+//            val fm: FragmentManager = supportFragmentManager
+//            val dialogSearchFragment = MySearchFragment.newInstance(this, list)
+//            dialogSearchFragment.show(fm, "my_search_fragment")
+//        }
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                return true
+//            }
+//        })
+//        return true
+//    }
 }

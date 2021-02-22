@@ -12,6 +12,7 @@ data class MySales(
     val lotto_lottery: Double? = null,
     val instant_lottery: Double? = null,
     val deposit_into_bank: Double? = null,
+    val lottery_remit: Double? = null,
     val cash: Double? = null,
     val tax_1: Double? = null,
     val tax_2: Double? = null,

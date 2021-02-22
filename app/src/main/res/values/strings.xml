@@ -13,4 +13,14 @@
     <string name="no_internet_connection">No internet connection found!</string>
     <string name="network_failure">Network Failure</string>
     <string name="conversion_error">Conversion Error</string>
+
+    <string name="string_gross_amount"><![CDATA[Gross : <b>%s</b>]]></string>
+    <string name="string_nett_amount"><![CDATA[Nett : <b>%s</b>]]></string>
+    <string name="string_date"><![CDATA[<i>%s</i>]]></string>
+    <string name="string_total_lottery_amount"><![CDATA[Total <b>Lottery</b> : %s]]></string>
+    <string name="string_lottery_paidout_amount"><![CDATA[<b>Paid</b> Lottery : <b>%s</b>]]></string>
+    <string name="string_bank_deposit_amount"><![CDATA[Bank Deposit : <b>%s</b>]]></string>
+    <string name="string_cash_amount"><![CDATA[Cash : <b>%s</b>]]></string>
+    <string name="string_total_tax"><![CDATA[Total Tax : <b>%s</b>]]></string>
+
 </resources>

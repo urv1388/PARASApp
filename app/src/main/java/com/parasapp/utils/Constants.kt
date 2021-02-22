@@ -1,5 +1,6 @@
 package com.parasapp.utils
 
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,6 +17,18 @@ class Constants {
         fun getDateOfCollection(date: Date): String {
             val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.ROOT);
             return dateFormat.format(date);
+        }
+
+
+        fun getFormattedDateFromString(date: String): String? {
+            try {
+                val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.ROOT);
+                val dateFormatNew = SimpleDateFormat("dd MMM yyyy", Locale.CANADA);
+                return dateFormatNew.format(dateFormat.parse(date) ?: "");
+            } catch (e: ParseException) {
+                e.printStackTrace()
+                return null
+            }
         }
 
     }

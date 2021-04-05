@@ -16,7 +16,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class MainViewModel(application: Application, val firestore: FirebaseFirestore) :
+class MainViewModel(application: Application, val firestore: FirebaseFirestore?) :
     AndroidViewModel(application) {
 
     private val TAG = "MainViewModel"
@@ -32,7 +32,7 @@ class MainViewModel(application: Application, val firestore: FirebaseFirestore) 
             delay(1500)
             try {
                 if (Utils.hasInternetConnection(getApplication())) {
-                    firestore.collection(path).get().addOnSuccessListener {
+                    firestore!!.collection(path).get().addOnSuccessListener {
                         Log.d(TAG, "getCollectionReference: ")
                         _collectionReferenceResponse.postValue(Resource.Success(it))
                     }.addOnFailureListener {

@@ -3,17 +3,16 @@ package com.parasapp.ui.main
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.FragmentManager
 import com.parasapp.R
 import com.parasapp.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-import java.util.Calendar.*
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var searchView: SearchView
+    private lateinit var viewModel: AddDataViewModel
+
     val list = arrayListOf<String>()
     private val TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +28,11 @@ class MainActivity : AppCompatActivity() {
                 StoreFragment.newInstance("stores"),
                 "my_store_fragment"
             ).commit()
-        showSalesOfMonth(getInstance())
+        showSalesOfMonth(Calendar.getInstance())
         val c: Calendar = Calendar.getInstance()
         for (i in Calendar.JANUARY..Calendar.DECEMBER) {
-            c.set(MONTH, i)
-            val c2: String? = c.getDisplayName(MONTH, LONG, Locale.US)
+            c.set(Calendar.MONTH, i)
+            val c2: String? = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US)
             if (c2 != null) {
                 list.add(c2)
             }
@@ -68,13 +67,24 @@ class MainActivity : AppCompatActivity() {
 //        }
 //        initViewModelAndObserver()
 //        mainViewModel.getCollectionReference("stores/my_store_freeburg/sales")
+        floatingActionButtonAddData.setOnClickListener {
+            val fragment: AddDataFragment = AddDataFragment.newInstance()
+            supportFragmentManager.beginTransaction().replace(R.id.fragmentAddData, fragment)
+                .commit()
+        }
+
+
     }
 
     private fun showSalesOfMonth(calendar: Calendar) {
-        textViewSelectedMonth.text = calendar.getDisplayName(MONTH, LONG, Locale.US)
-        calendar.set(DATE, calendar.getActualMinimum(DATE))
+        textViewSelectedMonth.text = calendar.getDisplayName(
+            Calendar.MONTH,
+            Calendar.LONG,
+            Locale.US
+        )
+        calendar.set(Calendar.DATE, calendar.getActualMinimum(Calendar.DATE))
         val minimumDateRange = Constants.getDateOfCollection(calendar.time)
-        calendar.set(DATE, calendar.getActualMaximum(DATE))
+        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE))
         val maximumDateRange = Constants.getDateOfCollection(calendar.time)
         supportFragmentManager.findFragmentByTag("my_sales_fragment")?.onDestroy()
         supportFragmentManager.beginTransaction()
@@ -93,12 +103,12 @@ class MainActivity : AppCompatActivity() {
 
     fun onClickMonthSelection(month: Int) {
         val calendar = Calendar.getInstance()
-        calendar.set(MONTH, month)
+        calendar.set(Calendar.MONTH, month)
 //        searchView.setQuery(calendar.getDisplayName(MONTH, LONG, Locale.US), true)
 //        searchView.onActionViewCollapsed();
         showSalesOfMonth(calendar)
     }
-//
+
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {
 //        menuInflater.inflate(R.menu.main_menu, menu)
 //        val myActionMenuItem: MenuItem = menu.findItem(R.id.action_search)
